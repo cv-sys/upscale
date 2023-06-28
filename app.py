@@ -83,20 +83,20 @@ with gr.Blocks(css=css) as demo:
 
 Please note that after you upload an image, it may take several minutes before the progress bar appears. This is because we first convert your video to ensure the correct format.
 ''')
-    with gr.Tab("Image"):
-        with gr.Row():
-            with gr.Column():
-                iinp = gr.Image(label="Upload Image", interactive=True, type="pil")
-                imod = gr.Dropdown(
-                    ["BSRGAN (Default)", "Real ESRGAN"],
-                    value="BSRGAN (Default)",
-                    interactive=True,
-                    label="Model"
-                )
-            with gr.Column():
-                iout = gr.Image(label="View Image", interactive=False, type="filepath")
-                ifile = gr.File(label="Download Image", interactive=False)
-        ibtn = gr.Button(value="Upscale Image")
+    # with gr.Tab("Image"):
+    #     with gr.Row():
+    #         with gr.Column():
+    #             iinp = gr.Image(label="Upload Image", interactive=True, type="pil")
+    #             imod = gr.Dropdown(
+    #                 ["BSRGAN (Default)", "Real ESRGAN"],
+    #                 value="BSRGAN (Default)",
+    #                 interactive=True,
+    #                 label="Model"
+    #             )
+    #         with gr.Column():
+    #             iout = gr.Image(label="View Image", interactive=False, type="filepath")
+    #             ifile = gr.File(label="Download Image", interactive=False)
+    #     ibtn = gr.Button(value="Upscale Image")
     with gr.Tab("Video"):
         with gr.Row():
             with gr.Column():
