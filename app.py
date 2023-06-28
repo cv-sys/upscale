@@ -43,7 +43,7 @@ def upscale_image(input_image, output_image, mname):
     elif modelname == 'real esrgan':
         model = iresrgan
     shutil.copy(input_image, output_image)
-    model(input_image)
+    model(output_image)
 
 # Gradio interface
 def video_upscaling_interface(input_text, model_name, progress=gr.Progress()):
