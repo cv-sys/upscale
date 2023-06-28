@@ -1,2 +1,4 @@
 gradio
 git+https://github.com/fakerybakery/sldl-gr
+ffmpeg-python
+pillow
