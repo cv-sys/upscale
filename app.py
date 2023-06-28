@@ -42,7 +42,8 @@ def upscale_image(input_image, output_image, mname):
         pass
     elif modelname == 'real esrgan':
         model = iresrgan
-    model(input_image, output_image)
+    shutil.copy(input_image, output_image)
+    model(input_image)
 
 # Gradio interface
 def video_upscaling_interface(input_text, model_name, progress=gr.Progress()):
@@ -61,13 +62,11 @@ def video_upscaling_interface(input_text, model_name, progress=gr.Progress()):
 
 
 def image_upscaling_interface(input_text, model_name):
-    print(input_text)
     if input_text:
         temp_dir = tempfile.mkdtemp()
         input_image_path = f"{temp_dir}/input_image.jpg"
         output_image_path = f"{temp_dir}/output_image.jpg"
-        image = Image.open(input_text)
-        image.save(input_image_path)
+        input_text.save(input_image_path)
         upscale_image(input_image_path, output_image_path, model_name)
         return [output_image_path, output_image_path]
     else:
@@ -87,7 +86,7 @@ Please note that after you upload an image, it may take several minutes before t
     with gr.Tab("Image"):
         with gr.Row():
             with gr.Column():
-                iinp = gr.Image(label="Upload Image", interactive=True)
+                iinp = gr.Image(label="Upload Image", interactive=True, type="pil")
                 imod = gr.Dropdown(
                     ["BSRGAN (Default)", "Real ESRGAN"],
                     value="BSRGAN (Default)",
@@ -95,7 +94,7 @@ Please note that after you upload an image, it may take several minutes before t
                     label="Model"
                 )
             with gr.Column():
-                iout = gr.Image(label="View Image", interactive=False)
+                iout = gr.Image(label="View Image", interactive=False, type="filepath")
                 ifile = gr.File(label="Download Image", interactive=False)
         ibtn = gr.Button(value="Upscale Image")
     with gr.Tab("Video"):
