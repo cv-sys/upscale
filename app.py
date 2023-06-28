@@ -19,7 +19,6 @@ bsrgan = VideoSR('BSRGAN').to(device)
 resrgan = VideoSR('RealESRGAN').to(device)
 
 def upscale_video(input_video, output_video, progress, mname):
-    print(f'Upscaling video. Input: {input_video}')
     modelname = mname.lower()
     model = bsrgan
     if modelname == 'bsrgan (default)':
@@ -28,10 +27,6 @@ def upscale_video(input_video, output_video, progress, mname):
     elif modelname == 'real esrgan':
         model = resrgan
     model(input_video, output_video, progress.tqdm)
-    # imgs = [None] * 24
-    # for img in progress.tqdm(imgs, desc="Loading..."):
-        # time.sleep(0.1)
-    # shutil.copy(input_video, output_video)
 
 # Gradio interface
 def video_upscaling_interface(input_text, model_name, progress=gr.Progress()):
@@ -48,22 +43,21 @@ def video_upscaling_interface(input_text, model_name, progress=gr.Progress()):
 css = "footer {display: none !important;} .gradio-container {min-height: 0px !important;}"
 
 
-
-input_interfaces = [
-    gr.inputs.Video(label="Upload Video"),
-    gr.Dropdown(
-        ["BSRGAN (Default)", "Real ESRGAN"],
-        label="Model",
-        value="BSRGAN"
-    )
-]
-output_interfaces = [
-    gr.outputs.Video(label="Watch Video"),
-    gr.outputs.File(label="Download Video"),
-]
-
-# Create the Gradio interface
-app = gr.Interface(video_upscaling_interface, input_interfaces, css=css, outputs=output_interfaces)
-
-app.queue(concurrency_count=cc)
-app.launch()
+with gr.Blocks(css=css) as demo:
+    gr.Markdown("# Upscale by CVSYS")
+    with gr.Row():
+        with gr.Column():
+            vid = gr.Video(label="Upload Video", interactive=True)
+            mod = gr.Dropdown(
+                ["BSRGAN (Default)", "Real ESRGAN"],
+                value="BSRGAN (Default)",
+                interactive=True,
+                label="Model"
+            )
+        with gr.Column():
+            vidout = gr.Video(label="Watch Video", interactive=False)
+            file = gr.File(label="Download Video", interactive=False)
+    btn = gr.Button(value="Upscale")
+    btn.click(video_upscaling_interface, [vid, mod], [vidout, file])
+    demo.queue(concurrency_count=cc)
+    demo.launch()
