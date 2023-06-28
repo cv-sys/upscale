@@ -41,7 +41,7 @@ def upscale_image(input_image, output_image, mname):
         # do nothing
         pass
     elif modelname == 'real esrgan':
-        model = oresrgan
+        model = iresrgan
     model(input_image, output_image)
 
 # Gradio interface
@@ -50,8 +50,6 @@ def video_upscaling_interface(input_text, model_name, progress=gr.Progress()):
         temp_dir = tempfile.mkdtemp()
         input_video_path = f"{temp_dir}/input_video"
         output_video_path = f"{temp_dir}/output_video.mp4"
-
-        # Convert input video to mp4 using ffmpeg
         ffmpeg.input(input_text).output(input_video_path + '.mp4').run()
 
         # Upscale the video
@@ -63,6 +61,7 @@ def video_upscaling_interface(input_text, model_name, progress=gr.Progress()):
 
 
 def image_upscaling_interface(input_text, model_name):
+    print(input_text)
     if input_text:
         temp_dir = tempfile.mkdtemp()
         input_image_path = f"{temp_dir}/input_image.jpg"
@@ -79,7 +78,12 @@ css = "footer {display: none !important;} .gradio-container {min-height: 0px !im
 
 
 with gr.Blocks(css=css) as demo:
-    gr.Markdown("# Upscale by CVSYS")
+    gr.Markdown('''
+# Upscale
+## A CVSYS Project
+
+Please note that after you upload an image, it may take several minutes before the progress bar appears. This is because we first convert your video to ensure the correct format.
+''')
     with gr.Tab("Image"):
         with gr.Row():
             with gr.Column():
@@ -108,7 +112,7 @@ with gr.Blocks(css=css) as demo:
                 vout = gr.Video(label="Watch Video", interactive=False)
                 vfile = gr.File(label="Download Video", interactive=False)
         vbtn = gr.Button(value="Upscale Video")
-    ibtn.click(image_upscaling_interface, [iinp, imod], [iout, ifile])
-    vbtn.click(video_upscaling_interface, [vinp, vmod], [vout, vfile])
+    ibtn.click(image_upscaling_interface, [iinp, imod], outputs=[iout, ifile])
+    vbtn.click(video_upscaling_interface, [vinp, vmod], outputs=[vout, vfile])
     demo.queue(concurrency_count=cc)
     demo.launch()
