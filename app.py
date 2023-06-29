@@ -111,7 +111,7 @@ Please note that after you upload an image, it may take several minutes before t
                 vout = gr.Video(label="Watch Video", interactive=False)
                 vfile = gr.File(label="Download Video", interactive=False)
         vbtn = gr.Button(value="Upscale Video")
-    ibtn.click(image_upscaling_interface, [iinp, imod], outputs=[iout, ifile])
+    # ibtn.click(image_upscaling_interface, [iinp, imod], outputs=[iout, ifile])
     vbtn.click(video_upscaling_interface, [vinp, vmod], outputs=[vout, vfile])
     demo.queue(concurrency_count=cc)
     demo.launch()
