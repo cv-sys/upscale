@@ -6,7 +6,7 @@ Welcome to Upscale, a CVSYS project.
 
 Please be respectful and **DO NOT upload videos longer than 15 seconds**. Because it is running on a FREE HF Space, expect HOURS (literally - around 3 hours...) to process 5 minutes.
 
-It takes over 10 minutes to upscale a 16-frame video!!
+It takes over 20 minutes to upscale a 16-frame video!!
 
 ## Support
 
