@@ -2,6 +2,10 @@
 
 Welcome to Upscale, a CVSYS project.
 
+## [Live Demo](https://huggingface.co/spaces/cvsys/upscale)
+
+Please be respectful and **DO NOT upload videos longer than 15 seconds**. Because it is running on a FREE HF Space, expect HOURS to process 5 minutes.
+
 ## Requirements
 
  * Python >= 3.10
