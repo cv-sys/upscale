@@ -6,6 +6,14 @@ Welcome to Upscale, a CVSYS project.
 
 Please be respectful and **DO NOT upload videos longer than 15 seconds**. Because it is running on a FREE HF Space, expect HOURS to process 5 minutes.
 
+## Support
+
+Upscale by CVSYS supports:
+
+ * CPU inference
+ * CUDA GPU inference
+ * MPS GPU (Apple Silicon) inference
+
 ## Requirements
 
  * Python >= 3.10
