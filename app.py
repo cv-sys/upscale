@@ -17,7 +17,7 @@ elif torch.cuda.is_available():
     device = 'cuda'
     cc = 10
 else:
-    device = 'auto'
+    device = 'cpu'
 
 vbsrgan = VideoSR('BSRGAN').to(device)
 vresrgan = VideoSR('RealESRGAN').to(device)
