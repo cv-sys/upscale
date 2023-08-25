@@ -23,4 +23,4 @@ Upscale by CVSYS supports:
 
 ## License
 
-Upscale is licensed under the AGPL license. If you enjoy this project, please Star us on GitHub and Like our Hugging Face Space.
+Upscale is licensed under the AGPL license, but we plan to switch to the Apache license soon. If you enjoy this project, please Star us on GitHub and Like our Hugging Face Space.
